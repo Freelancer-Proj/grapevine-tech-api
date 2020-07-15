@@ -33,6 +33,12 @@ gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'ckeditor', '~> 4.2.4'
 gem 'activeadmin_addons'
 
+gem "capistrano"
+gem "capistrano3-puma"
+gem "capistrano-rails", require: false
+gem "capistrano-bundler", require: false
+gem "capistrano-rbenv"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
