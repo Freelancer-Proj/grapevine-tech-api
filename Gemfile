@@ -33,6 +33,7 @@ gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'ckeditor', '~> 4.2.4'
 gem 'activeadmin_addons'
 gem 'unicorn', '5.3.0'
+gem 'uglifier', '>= 1.3.0'
 
 gem "capistrano"
 gem "capistrano3-puma"
