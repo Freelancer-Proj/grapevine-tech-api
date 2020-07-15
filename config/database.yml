@@ -6,3 +6,14 @@ default: &default
 development:
   <<: *default
   database: grapevine_tech_api_development
+
+production:
+  <<: *default
+  host: localhost
+  adapter: postgresql
+  encoding: utf8
+  database: grapevine_tech_api_production
+  pool: 5
+  username: <%= ENV['APPNAME_DATABASE_USER'] %>
+  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
+  
