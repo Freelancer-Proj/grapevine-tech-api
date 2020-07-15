@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'activeadmin', '~> 2.7'
 gem 'devise', '~> 4.7', '>= 4.7.2'
 gem 'ckeditor', '~> 4.2.4'
+gem 'activeadmin_addons'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

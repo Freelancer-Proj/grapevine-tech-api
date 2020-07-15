@@ -12,9 +12,11 @@ module Api
       end
       
       def create
-        contact = ContactUs.new(permit_params)
-        if contact.save
-          render json: contact
+        @contact = ContactUs.new(permit_params)
+        if @contact.save
+          render json: @contact, status: :created
+        else
+          render json: @contact.errors, status: :unprocessable_entity
         end
       end
 

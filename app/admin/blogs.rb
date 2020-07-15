@@ -18,7 +18,7 @@ ActiveAdmin.register Blog do
     f.inputs do
       f.input :title
       f.input :path
-      f.input :tags
+      f.input :tags, as: :tags
       f.input :desc, as: :ckeditor, label: 'Description'
       f.input :content, as: :ckeditor
       f.input :images
