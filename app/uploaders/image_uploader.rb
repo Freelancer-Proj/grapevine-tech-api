@@ -1,11 +1,12 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
   include Cloudinary::CarrierWave
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
+
   version :standard do 
-      process resize_to_fill: [200,200, :north]
+    process resize_to_fill: [200,200, :north]
   end
 
   version :thumb do
@@ -16,11 +17,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
     var = :"@#{mounted_as}_timestamp"
     model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
- 
+
   def public_id
     "grapevine/#{timestamp}"
   end
-
 
   # Choose what kind of storage to use for this uploader:
   # storage :file

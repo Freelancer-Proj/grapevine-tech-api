@@ -39,6 +39,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'carrierwave', '~> 2.1'
 gem 'cloudinary', '~> 1.16', '>= 1.16.1'
 gem 'rack-cors', '~> 0.4.0'
+gem 'pry'
 
 
 gem "capistrano"

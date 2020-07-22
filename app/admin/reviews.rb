@@ -17,12 +17,34 @@ ActiveAdmin.register Review do
 
   form do |f|
     f.inputs do
-      f.input :content, as: :text
       f.input :reviewer
+      f.input :content, as: :text
       f.input :position
-      f.input :avatar
+      f.input :avatar, as: :file, hint: (f.object.new_record? || f.object.avatar.blank?) ? 'No have image' : image_tag(f.object.avatar.url(:thumb))
     end
     f.actions
+  end
+
+  index do
+    column :id
+    column :reviewer
+    column :content
+    column :position
+    column :avatar do |ad|
+      image_tag url_for(ad.avatar.url(:thumb))
+    end
+    actions
+  end
+
+  show do
+    attributes_table do
+      row :reviewer
+      row :content
+      row :position
+      row :avatar do |ad|
+        image_tag url_for(ad.avatar.url)
+      end
+    end
   end
   
 end
