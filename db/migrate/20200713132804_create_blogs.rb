@@ -6,7 +6,7 @@ class CreateBlogs < ActiveRecord::Migration[6.0]
       t.string :tags
       t.text :desc
       t.text :content
-      t.text :images, array: true
+      t.string :images
 
       t.timestamps
     end

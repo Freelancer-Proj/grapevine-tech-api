@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2020_07_29_042518) do
     t.string "tags"
     t.text "desc"
     t.text "content"
-    t.text "images", array: true
+    t.string "images"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -18,7 +18,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
  
   def public_id
-    "grapevine/#{timestamp}"
+    "grapevine/avatar/#{timestamp}"
   end
 
 

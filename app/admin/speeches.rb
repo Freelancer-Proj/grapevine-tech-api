@@ -18,7 +18,7 @@ ActiveAdmin.register Speech do
   form do |f|
     f.inputs do
 
-      f.input :title, as: :ckeditor
+      f.input :title
       f.input :content, as: :ckeditor
     end
     f.actions

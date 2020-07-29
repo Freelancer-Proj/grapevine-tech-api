@@ -10,19 +10,45 @@ ActiveAdmin.register Blog do
   # or
   #
   permit_params do
-    permitted = [:title, :path, :tags, :desc, :content, images: []]
+    permitted = [:title, :path, :tags, :desc, :content, :images]
     permitted << :other if params[:action] == 'create'
     permitted
   end
-  form html: { multipart: true } do |f|
+
+  form do |f|
     f.inputs do
       f.input :title
       f.input :path
       f.input :tags, as: :tags
       f.input :desc, as: :ckeditor, label: 'Description'
       f.input :content, as: :ckeditor
-      f.input :images, as: :file, input_html: { multiple: true }
+      f.input :images, as: :file, hint: (f.object.new_record? || f.object.images.blank?) ? 'No have image' : image_tag(f.object.images.url(:thumb))
     end
     f.actions
+  end
+
+  index do
+    column :id
+    column :title
+    column :tags
+    column :desc
+    column :content
+    column :images do |ad|
+      image_tag url_for(ad.images.url(:thumb))
+    end
+    actions
+  end
+
+  show do
+    attributes_table do
+      row :title
+      row :path
+      row :tags
+      row :desc
+      row :content
+      row :images do |ad|
+        image_tag url_for(ad.images.url)
+      end
+    end
   end
 end

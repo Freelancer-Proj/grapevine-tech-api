@@ -1,5 +1,5 @@
 class Blog < ApplicationRecord
-    # mount_uploader :images, ImageUploader
+    mount_uploader :images, ImageUploader
 
     validates :title, presence: true
     validates :desc, presence: true

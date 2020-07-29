@@ -19,7 +19,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def public_id
-    "grapevine/#{timestamp}"
+    "grapevine/image/#{timestamp}"
   end
 
   # Choose what kind of storage to use for this uploader:
