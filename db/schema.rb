@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_174130) do
+ActiveRecord::Schema.define(version: 2020_07_29_042518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,9 +45,9 @@ ActiveRecord::Schema.define(version: 2020_07_14_174130) do
     t.string "title"
     t.string "path"
     t.string "tags"
-    t.string "desc"
-    t.string "content"
-    t.string "images"
+    t.text "desc"
+    t.text "content"
+    t.text "images", array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -60,13 +60,13 @@ ActiveRecord::Schema.define(version: 2020_07_14_174130) do
     t.string "furigana_name"
     t.string "email"
     t.string "phone"
-    t.string "content"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "content"
+    t.text "content"
     t.string "reviewer"
     t.string "position"
     t.string "avatar"
@@ -74,25 +74,28 @@ ActiveRecord::Schema.define(version: 2020_07_14_174130) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "staffs", force: :cascade do |t|
-    t.string "name"
-    t.string "position"
-    t.string "desc"
-    t.string "speciality"
+  create_table "speeches", force: :cascade do |t|
+    t.text "title"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+  create_table "staffs", force: :cascade do |t|
+    t.string "name"
+    t.string "position"
+    t.text "desc"
+    t.string "speciality"
+    t.string "avatar"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "statistics", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

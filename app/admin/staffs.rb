@@ -9,7 +9,7 @@ ActiveAdmin.register Staff do
   #
   # or
   permit_params do
-    permitted = [:name, :position, :desc, :speciality]
+    permitted = [:name, :position, :desc, :speciality, :avatar]
     permitted << :other if params[:action] == 'create'
     permitted
   end
@@ -20,6 +20,7 @@ ActiveAdmin.register Staff do
       f.input :position
       f.input :desc, as: :text, label: 'Description'
       f.input :speciality, as: :tags, collection: ['Angular', 'React', 'Wordpress', 'PHP']
+      f.input :avatar
     end
     f.actions
   end

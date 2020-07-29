@@ -3,8 +3,9 @@ class CreateStaffs < ActiveRecord::Migration[6.0]
     create_table :staffs do |t|
       t.string :name
       t.string :position
-      t.string :desc
+      t.text :desc
       t.string :speciality
+      t.string :avatar
 
       t.timestamps
     end

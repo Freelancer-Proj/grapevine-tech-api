@@ -8,7 +8,7 @@ class CreateContactUs < ActiveRecord::Migration[6.0]
       t.string :furigana_name
       t.string :email
       t.string :phone
-      t.string :content
+      t.text :content
 
       t.timestamps
     end

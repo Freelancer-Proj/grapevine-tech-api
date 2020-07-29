@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       resources :staffs, only: [:index, :show]
       resources :reviews, only: [:index, :show]
       resources :contact_us, only: [:index, :show, :create]
+      resources :statistics, only: [:index, :show]
+      resources :speeches, only: [:index, :show]
     end
   end
 end

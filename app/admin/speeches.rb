@@ -1,27 +1,25 @@
-ActiveAdmin.register Blog do
+ActiveAdmin.register Speech do
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :title, :path, :tags, :desc, :content, :images
+  # permit_params :title, :content
   #
   # or
   #
   permit_params do
-    permitted = [:title, :path, :tags, :desc, :content, images: []]
+    permitted = [:title, :content]
     permitted << :other if params[:action] == 'create'
     permitted
   end
-  form html: { multipart: true } do |f|
+  
+  form do |f|
     f.inputs do
-      f.input :title
-      f.input :path
-      f.input :tags, as: :tags
-      f.input :desc, as: :ckeditor, label: 'Description'
+
+      f.input :title, as: :ckeditor
       f.input :content, as: :ckeditor
-      f.input :images, as: :file, input_html: { multiple: true }
     end
     f.actions
   end
