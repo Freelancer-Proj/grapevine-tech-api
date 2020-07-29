@@ -337,4 +337,9 @@ ActiveAdmin.setup do |config|
     config.default_namespace = false
     # ...
   end
+
+  class ActiveAdmin::Devise::SessionsController
+    skip_before_action :verify_authenticity_token
+    protect_from_forgery with: :null_session
+  end
 end

@@ -40,6 +40,7 @@ gem 'carrierwave', '~> 2.1'
 gem 'cloudinary', '~> 1.16', '>= 1.16.1'
 gem 'rack-cors', '~> 0.4.0'
 gem 'pry'
+gem "net-ssh-gateway", "2.0.0"
 
 
 gem "capistrano"
