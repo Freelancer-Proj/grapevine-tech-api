@@ -9,6 +9,11 @@ ActiveAdmin.register Blog do
   #
   # or
   #
+
+  controller do
+    resources_configuration[:self][:finder] = :find_by_path
+  end
+
   permit_params do
     permitted = [:title, :path, :tags, :desc, :content, :images]
     permitted << :other if params[:action] == 'create'
