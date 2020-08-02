@@ -2,7 +2,7 @@ class Blog < ApplicationRecord
     mount_uploader :images, ImageUploader
 
     extend FriendlyId
-    friendly_id :path, use: :slugged
+    friendly_id :path, use: %i(slugged finders)
 
     def should_generate_new_friendly_id?
       path_changed? || super
