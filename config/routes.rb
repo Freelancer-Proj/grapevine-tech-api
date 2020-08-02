@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :contact_us, only: [:index, :show, :create]
       resources :statistics, only: [:index, :show]
       resources :speeches, only: [:index, :show]
+      resources :portfolios, only: [:index, :show]
     end
   end
 end

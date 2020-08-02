@@ -20,7 +20,10 @@ ActiveAdmin.register Staff do
       f.input :position
       f.input :desc, as: :text, label: 'Description'
       f.input :speciality, as: :tags, collection: ['Angular', 'React', 'Wordpress', 'PHP']
-      f.input :avatar
+      f.input :avatar, :as => :radio, :collection => {"Founder" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/founder_uhtmmh.png",
+      "Manager" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/manager_pchwp5.png",
+      "Secretary" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/secretary_rucsnk.png",
+      "Supervisor" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/supervisor_vc119s.png"}
     end
     f.actions
   end

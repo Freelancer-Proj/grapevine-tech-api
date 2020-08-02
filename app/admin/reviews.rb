@@ -26,6 +26,7 @@ ActiveAdmin.register Review do
   end
 
   index do
+    selectable_column
     column :id
     column :reviewer
     column :content
