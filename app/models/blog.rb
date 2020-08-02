@@ -2,7 +2,11 @@ class Blog < ApplicationRecord
     mount_uploader :images, ImageUploader
 
     extend FriendlyId
-    friendly_id :name, use: :slugged, slug_column: :path
+    friendly_id :path, use: :slugged
+
+    def should_generate_new_friendly_id?
+      path_changed? || super
+    end
 
     PATH_FORMAT = /([[:lower:]|[:upper:]]|[0-9]+-?[[:lower:]|[:upper:]])(-[[:lower:]|[:upper:]0-9]+|[[:lower:]|[:upper:]0-9])*/
     validates :title, presence: true

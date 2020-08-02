@@ -10,41 +10,6 @@ ActiveAdmin.register Blog do
   # or
   #
 
-  controller do
-
-    def show
-      @blog = Blog.friendly.find(params[:id])
-    end
-
-    def create
-      @blog = Blog.new(permitted_params[:blog].as_json)
-        if @blog.save
-          redirect_to blog_path(@blog.path)
-        else
-          if params[:blog].present?
-            @blog[:path] = params[:blog][:path]
-          end
-          render action: 'new'
-        end
-    end
-
-    # def update
-    #   binding.pry
-    #   @blog = Blog.find(permitted_params[:blog][:path].as_json)
-    #   # @blog = Blog.friendly.find(params[:id])
-    #   if @blog.update(permitted_params[:blog].as_json)
-    #     redirect_to blog_path(@blog.path)
-    #   else
-    #     if params[:blog].present?
-    #       binding.pry
-    #       params[:id] = @blog[:path]
-    #       @blog[:path] = params[:blog][:path]
-    #     end
-    #     render action: 'edit'
-    #   end
-    # end
-  end
-
   permit_params do
     if params[:blog]
       params[:blog][:path] = params[:blog][:path].downcase
