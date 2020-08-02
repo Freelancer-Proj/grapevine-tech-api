@@ -7,7 +7,7 @@ module Api
 			end
 
 			def show
-				render json: Blog.find_by!(path: params[:path])
+				render json: Blog.find_by!(path: params[:id])
 			end
 		end
 	end
