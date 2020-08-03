@@ -10,7 +10,7 @@ ActiveAdmin.register Portfolio do
   # or
   #
   permit_params do
-    permitted = [:title, :type_portfolio, :desc, :cover, :content]
+    permitted = [:title, :type_portfolio, :desc, :cover, :content, :period, :media, :main_tech]
     permitted << :other if params[:action] == 'create'
     permitted
   end
@@ -21,6 +21,9 @@ ActiveAdmin.register Portfolio do
       f.input :type_portfolio
       f.input :desc, as: :text
       f.input :content, as: :ckeditor
+      f.input :period
+      f.input :media
+      f.input :main_tech
       f.input :cover, as: :file, hint: (f.object.new_record? || f.object.cover.blank?) ? 'No have image' : image_tag(f.object.cover.url(:thumb))
     end
     f.actions
@@ -33,6 +36,9 @@ ActiveAdmin.register Portfolio do
     column :type_portfolio
     column :desc
     column :content
+    column :period
+    column :media
+    column :main_tech
     column :cover do |ad|
       image_tag url_for(ad.cover.url(:thumb))
     end
@@ -45,6 +51,9 @@ ActiveAdmin.register Portfolio do
       row :type_portfolio
       row :desc
       row :content
+      row :period
+      row :media
+      row :main_tech
       row :cover do |ad|
         image_tag url_for(ad.cover.url)
       end
