@@ -16,9 +16,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
     var = :"@#{mounted_as}_timestamp"
     model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
- 
+
   def public_id
-    "grapevine/avatar/#{timestamp}"
+    "grapevine/avatar/" + Cloudinary::Utils.random_public_id;
   end
 
 

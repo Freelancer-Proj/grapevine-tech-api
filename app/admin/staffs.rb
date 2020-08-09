@@ -19,7 +19,7 @@ ActiveAdmin.register Staff do
       f.input :name
       f.input :position
       f.input :desc, as: :text, label: 'Description'
-      f.input :speciality, as: :tags, collection: ['Angular', 'React', 'Wordpress', 'PHP']
+      f.input :speciality, as: :tags, collection: ['Angular', 'React', 'Wordpress', 'Php', 'Aws', 'Gcp', 'Swift', 'Java', 'Agora.io', 'Go', 'Node.js']
       f.input :avatar, :as => :radio, :collection => {"Founder" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/founder_uhtmmh.png",
       "Manager" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/manager_pchwp5.png",
       "Secretary" => "https://res.cloudinary.com/dfdi9fgof/image/upload/v1595993781/grapevine/avatar/secretary_rucsnk.png",
@@ -27,5 +27,4 @@ ActiveAdmin.register Staff do
     end
     f.actions
   end
-  
 end

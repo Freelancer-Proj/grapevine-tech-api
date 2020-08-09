@@ -43,7 +43,6 @@ gem 'pry'
 gem "net-ssh-gateway", "2.0.0"
 gem 'active_model_serializers', '~> 0.10.2'
 
-
 gem "capistrano"
 gem "capistrano-rails", require: false
 gem "capistrano-bundler", require: false

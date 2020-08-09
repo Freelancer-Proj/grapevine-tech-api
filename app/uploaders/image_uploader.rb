@@ -18,8 +18,16 @@ class ImageUploader < CarrierWave::Uploader::Base
     model.instance_variable_get(var) or model.instance_variable_set(var, Time.now.to_i)
   end
 
+  # def public_id
+  #   random_token = Digest::SHA2.hexdigest("#{Time.now.utc}--#{model.id.to_s}").first(20)
+  #   ivar = "@#{mounted_as}_secure_token"    
+  #   token = model.instance_variable_get(ivar)
+  #   token ||= model.instance_variable_set(ivar, random_token)
+  #   "grapevine/image/#{model.id}_#{token}.jpg" if original_filename
+  # end
+
   def public_id
-    "grapevine/image/#{timestamp}"
+    "grapevine/image/" + Cloudinary::Utils.random_public_id;
   end
 
   # Choose what kind of storage to use for this uploader:

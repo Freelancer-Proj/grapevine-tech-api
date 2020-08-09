@@ -14,7 +14,7 @@ ActiveAdmin.register Blog do
     if params[:blog]
       params[:blog][:path] = params[:blog][:path].downcase
     end
-    permitted = [:title, :path, :tags, :desc, :content, :images, blogs_staffs_attributes: [:id, :staff_id, :_destroy ]]
+    permitted = [:title, :path, :tags, :desc, :content, blog_images_attributes: [:id, :image, :_destroy ], blogs_staffs_attributes: [:id, :staff_id, :_destroy ]]
     permitted << :other if params[:action] == 'create'
     permitted
   end
@@ -32,14 +32,25 @@ ActiveAdmin.register Blog do
   #   end
   # end
 
-  form do |f|
+  form html: {multipart: :true} do |f|
     f.inputs do
       f.input :title
       f.input :path
       f.input :tags, as: :tags
       f.input :desc, as: :ckeditor, label: 'Description'
       f.input :content, as: :ckeditor
-      f.input :images, as: :file, hint: (f.object.new_record? || f.object.images.blank?) ? 'No have image' : image_tag(f.object.images.url(:thumb))
+
+      f.inputs "Images" do
+        if f.object.blog_images.length > 0
+          f.has_many :blog_images, heading: false, allow_destroy: true do |cd|
+            cd.input :image, as: :file, hint: (cd.object.image.blank?) ? 'No have image' : image_tag(cd.object.image.url(:thumb))
+          end
+        else
+          f.fields_for :blogs_images, for: BlogImage.new do |i|
+            i.file_field :image, :multiple => true, name: "blog[blog_images_attributes][][image]"
+          end
+        end
+      end
       f.inputs "Responser" do
         f.has_many :blogs_staffs, heading: false, allow_destroy: true do |cd|
           cd.input :staff_id, as: :select, collection: Staff.all.map{|s| [s.name, s.id]}
@@ -49,7 +60,7 @@ ActiveAdmin.register Blog do
     f.actions
   end
 
-  index do
+  index do |blog|
     selectable_column
     column :id
     column :path
@@ -57,8 +68,23 @@ ActiveAdmin.register Blog do
     column :tags
     column :desc
     column :content
-    column :images do |ad|
-      image_tag url_for(ad.images.url(:thumb))
+    column 'Responser' do |b|
+      ul do
+        b.staffs.each do |staff|
+          li do 
+            staff.name
+          end
+        end
+      end
+    end
+    column 'Image' do |i|
+      ul do
+        i.blog_images.each do |img|
+          li do 
+            image_tag(img.image.url(:thumb))
+          end
+        end
+      end
     end
     actions
   end
@@ -70,10 +96,24 @@ ActiveAdmin.register Blog do
       row :tags
       row :desc
       row :content
-      row :images do |ad|
-        image_tag url_for(ad.images.url)
+      row "Responser" do
+        div do
+          blog.staffs.each do |staff|
+            div do 
+              staff.name
+            end
+          end
+        end
       end
-      
+      row "Images" do
+        div do
+          blog.blog_images.each do |img|
+            div do 
+              image_tag(img.image.url(:thumb))
+            end
+          end
+        end
+      end
     end
   end
 end
