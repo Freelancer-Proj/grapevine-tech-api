@@ -42,6 +42,7 @@ gem 'rack-cors', '~> 0.4.0'
 gem 'pry'
 gem "net-ssh-gateway", "2.0.0"
 gem 'active_model_serializers', '~> 0.10.2'
+gem 'kaminari', '~> 1.2.1'
 
 gem "capistrano"
 gem "capistrano-rails", require: false

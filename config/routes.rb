@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :statistics, only: [:index, :show]
       resources :speeches, only: [:index, :show]
       resources :portfolios, only: [:index, :show]
+      resources :news, only: [:index]
     end
   end
 end
