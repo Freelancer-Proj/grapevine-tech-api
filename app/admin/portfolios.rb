@@ -10,12 +10,12 @@ ActiveAdmin.register Portfolio do
   # or
   #
   permit_params do
-    permitted = [:title, :type_portfolio, :desc, :cover, :content, :period, :media, :main_tech]
+    permitted = [:title, :type_portfolio, :desc, :cover, :content, :period, :media, :main_tech, portfolio_images_attributes: [:id, :image, :_destroy ]]
     permitted << :other if params[:action] == 'create'
     permitted
   end
 
-  form do |f|
+  form html: {multipart: :true} do |f|
     f.inputs do
       f.input :title
       f.input :type_portfolio
@@ -24,7 +24,17 @@ ActiveAdmin.register Portfolio do
       f.input :period
       f.input :media
       f.input :main_tech
-      f.input :cover, as: :file, hint: (f.object.new_record? || f.object.cover.blank?) ? 'No have image' : image_tag(f.object.cover.url(:thumb))
+      f.inputs "Images" do
+        if f.object.portfolio_images.length > 0
+          f.has_many :portfolio_images, heading: false, allow_destroy: true do |cd|
+            cd.input :image, as: :file, hint: (cd.object.image.blank?) ? 'No have image' : image_tag(cd.object.image.url(:thumb))
+          end
+        else
+          f.fields_for :portfolios_images, for: PortfolioImage.new do |i|
+            i.file_field :image, :multiple => true, name: "portfolio[portfolio_images_attributes][][image]"
+          end
+        end
+      end
     end
     f.actions
   end
@@ -39,8 +49,14 @@ ActiveAdmin.register Portfolio do
     column :period
     column :media
     column :main_tech
-    column :cover do |ad|
-      image_tag url_for(ad.cover.url(:thumb))
+    column 'Image' do |i|
+      ul do
+        i.portfolio_images.each do |img|
+          li do
+            image_tag(img.image.url(:thumb))
+          end
+        end
+      end
     end
     actions
   end
@@ -54,8 +70,14 @@ ActiveAdmin.register Portfolio do
       row :period
       row :media
       row :main_tech
-      row :cover do |ad|
-        image_tag url_for(ad.cover.url)
+      row "Images" do
+        div do
+          portfolio.portfolio_images.each do |img|
+            div do 
+              image_tag(img.image.url(:thumb))
+            end
+          end
+        end
       end
     end
   end
