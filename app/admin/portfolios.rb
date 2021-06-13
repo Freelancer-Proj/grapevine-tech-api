@@ -24,6 +24,7 @@ ActiveAdmin.register Portfolio do
       f.input :period
       f.input :media
       f.input :main_tech
+      f.input :cover, as: :file, hint: (f.object.new_record? || f.object.cover.blank?) ? 'No have image' : image_tag(f.object.cover.url(:thumb))
       f.inputs "Images" do
         if f.object.portfolio_images.length > 0
           f.has_many :portfolio_images, heading: false, allow_destroy: true do |cd|
@@ -49,6 +50,9 @@ ActiveAdmin.register Portfolio do
     column :period
     column :media
     column :main_tech
+    column :cover do |ad|
+      image_tag url_for(ad.cover.url(:thumb))
+    end
     column 'Image' do |i|
       ul do
         i.portfolio_images.each do |img|
@@ -70,6 +74,9 @@ ActiveAdmin.register Portfolio do
       row :period
       row :media
       row :main_tech
+      row :cover do |ad|
+        image_tag url_for(ad.cover.url)
+      end
       row "Images" do
         div do
           portfolio.portfolio_images.each do |img|
